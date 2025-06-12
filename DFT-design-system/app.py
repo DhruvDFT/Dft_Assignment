@@ -12,7 +12,7 @@ users = {}
 assignments = {}
 counter = 0
 
-# Questions - 30 total questions, 10 per topic, unique for each engineer
+# Questions - 30 total questions, 10 per topic, all unique within each set
 QUESTIONS = {
     "scan_design": [
         "You have a design with 50,000 flip-flops and need to achieve 99% fault coverage. Describe your scan chain insertion strategy, including scan chain length optimization and timing considerations.",
@@ -20,35 +20,35 @@ QUESTIONS = {
         "During scan insertion, you encounter 500 non-scannable flops due to X-state issues and clock domain crossings. Describe your systematic approach to make these flops scannable.",
         "Your design has multiple clock domains (4 different clocks) and you need to implement scan. Explain your scan architecture strategy and how you would handle clock domain crossing during scan mode.",
         "After scan insertion, your design shows 15% area overhead which exceeds the 10% target. What techniques would you use to reduce scan area while maintaining coverage targets?",
-        "You're implementing scan compression and achieving only 20:1 compression ratio instead of target 50:1. What factors affect compression ratio and how would you improve it?",
-        "Your scan pattern simulation shows X-propagation causing pattern failures. Describe your approach to identify X-sources and implement X-masking or X-tolerance techniques.",
-        "During scan testing, you observe scan chain integrity failures in 3 out of 20 chains. What debug techniques would you use to isolate and fix scan chain breaks?",
-        "Your design requires at-speed scan testing for path delay faults. Explain your launch-on-capture vs launch-on-shift strategy and timing considerations for each approach.",
-        "You need to implement hierarchical scan for a large SoC with 10 IP blocks. Describe your scan planning strategy, including scan enable distribution and pattern flow management."
+        "You're implementing scan compression with EDT (Embedded Deterministic Test) and achieving only 20:1 compression ratio instead of target 50:1. What factors affect compression ratio and how would you improve it?",
+        "Your scan pattern simulation shows X-propagation causing 200 pattern failures out of 10,000 patterns. Describe your approach to identify X-sources and implement X-masking or X-tolerance techniques.",
+        "During scan testing, you observe scan chain integrity failures in 3 out of 20 chains with different failure signatures. What debug techniques would you use to isolate and fix scan chain breaks?",
+        "Your design requires at-speed scan testing for transition delay faults with 500MHz functional frequency. Explain your launch-on-capture vs launch-on-shift strategy and timing considerations.",
+        "You need to implement hierarchical scan for a large SoC with 10 IP blocks, each having different scan requirements. Describe your scan planning strategy, including scan enable distribution and pattern flow management."
     ],
     "bist_mbist": [
-        "Your design has 200 memory instances (SRAM, ROM, RF) and you need to implement MBIST. Describe your MBIST architecture, including controller placement and test algorithm selection.",
-        "During MBIST implementation, you're getting 85% memory coverage instead of target 95%. What factors affect MBIST coverage and how would you improve it?",
-        "Your MBIST patterns are detecting memory failures in 5% of dies. Explain your approach to analyze failure patterns and determine if they're systematic or random defects.",
-        "You need to implement runtime MBIST for automotive applications with 10^-9 failure rate requirement. Describe your MBIST strategy for continuous monitoring and error handling.",
-        "Your SoC has memories in different power domains and voltage islands. How would you implement MBIST considering power management and cross-domain testing challenges?",
-        "During MBIST execution, you observe test time exceeding target by 300%. What techniques would you use to optimize MBIST test time while maintaining coverage?",
-        "Your design requires both production test MBIST and field test MBIST. Explain the differences in requirements and how you would implement both modes efficiently.",
-        "You're implementing MBIST for high-speed memories (2GHz) and encountering timing closure issues. Describe your approach to handle high-frequency MBIST implementation.",
-        "Your MBIST controller is showing area overhead of 20% which exceeds budget. What architectural changes would you make to reduce MBIST area while maintaining functionality?",
-        "During MBIST debug, you find intermittent failures that don't reproduce consistently. What debug techniques and design modifications would you implement for better observability?"
+        "Your design has 200 memory instances (64 SRAMs, 32 ROMs, 104 Register Files) and you need to implement MBIST. Describe your MBIST architecture, including controller placement and test algorithm selection.",
+        "During MBIST implementation, you're getting 85% memory coverage instead of target 95%. What factors affect MBIST coverage and how would you improve it systematically?",
+        "Your MBIST patterns are detecting memory failures in 5% of dies with specific failure signatures. Explain your approach to analyze failure patterns and determine if they're systematic or random defects.",
+        "You need to implement runtime MBIST for automotive ISO26262 applications with 10^-9 failure rate requirement. Describe your MBIST strategy for continuous monitoring and error handling mechanisms.",
+        "Your SoC has memories distributed across 3 voltage domains (0.9V, 1.2V, 1.8V) and 2 power islands. How would you implement MBIST considering power management and cross-domain testing challenges?",
+        "During MBIST execution, you observe test time exceeding target by 300% due to sequential testing. What techniques would you use to optimize MBIST test time while maintaining thorough coverage?",
+        "Your design requires both production test MBIST and field test MBIST with different algorithms. Explain the differences in requirements and how you would implement both modes efficiently.",
+        "You're implementing MBIST for high-speed cache memories running at 2GHz and encountering timing closure issues. Describe your approach to handle high-frequency MBIST implementation and validation.",
+        "Your MBIST controller is showing 20% area overhead which exceeds the 8% budget constraint. What architectural changes and optimizations would you make to reduce MBIST area impact?",
+        "During MBIST debug, you find intermittent failures that don't reproduce consistently across temperature and voltage corners. What debug techniques and design modifications would you implement for better observability?"
     ],
     "boundary_scan": [
-        "Your PCB has 15 ICs with JTAG boundary scan capability. Design a JTAG chain topology considering signal integrity, debug access, and manufacturing test requirements.",
-        "During boundary scan implementation, you're achieving only 60% interconnect coverage on a complex PCB. What techniques would you use to improve coverage and test quality?",
-        "Your boundary scan testing reveals 20 interconnect failures between ICs. Describe your systematic approach to isolate opens, shorts, and bridging faults using boundary scan.",
-        "You need to implement IEEE 1149.1 compliance for a mixed-signal SoC with analog and digital pins. Explain your boundary scan cell design for different pin types.",
-        "Your JTAG chain has 500 boundary scan cells causing long test times. What optimization techniques would you implement to reduce test time while maintaining coverage?",
-        "During boundary scan testing, you encounter JTAG chain integrity issues with stuck-at faults in the chain. Describe your debug approach to locate and isolate chain failures.",
-        "Your design requires in-system programming through JTAG while maintaining boundary scan functionality. Explain your JTAG architecture to support both requirements efficiently.",
-        "You're implementing boundary scan for a high-speed design with 10Gbps differential pairs. What special considerations and techniques would you use for high-speed signal testing?",
-        "Your multi-chip module has 8 devices in a single JTAG chain with different voltage levels (1.2V, 1.8V, 3.3V). Describe your level-shifting strategy and chain design.",
-        "During boundary scan implementation, you need to test power and ground connections. Explain your approach to implement power supply pin testing using boundary scan techniques."
+        "Your PCB has 15 ICs with JTAG boundary scan capability in a complex topology. Design a JTAG chain architecture considering signal integrity, debug access, and manufacturing test requirements.",
+        "During boundary scan implementation, you're achieving only 60% interconnect coverage on a high-density PCB. What specific techniques would you use to improve coverage and test quality?",
+        "Your boundary scan testing reveals 20 interconnect failures between ICs with mixed failure types. Describe your systematic approach to isolate opens, shorts, and bridging faults using boundary scan diagnostics.",
+        "You need to implement IEEE 1149.1 compliance for a mixed-signal SoC with 500 digital pins and 50 analog pins. Explain your boundary scan cell design strategy for different pin types and analog considerations.",
+        "Your JTAG chain has 500 boundary scan cells causing test times of 45 minutes which exceeds production limits. What optimization techniques would you implement to reduce test time while maintaining coverage?",
+        "During boundary scan testing, you encounter JTAG chain integrity issues with stuck-at faults appearing randomly in the chain. Describe your debug approach to locate and isolate chain failures systematically.",
+        "Your design requires in-system programming through JTAG while maintaining boundary scan functionality for field diagnostics. Explain your JTAG architecture to support both requirements efficiently without conflicts.",
+        "You're implementing boundary scan for a high-speed design with 50 differential pairs running at 10Gbps. What special considerations and techniques would you use for high-speed signal testing and validation?",
+        "Your multi-chip module has 8 devices in a single JTAG chain with different voltage levels (1.2V, 1.8V, 3.3V). Describe your level-shifting strategy, chain design, and signal integrity considerations.",
+        "During boundary scan implementation, you need to test power and ground connections for 12 power domains. Explain your approach to implement power supply pin testing using boundary scan techniques and safety considerations."
     ]
 }
 
@@ -83,15 +83,11 @@ def create_test(eng_id, topic):
     counter += 1
     test_id = f"DFT_{topic}_{eng_id}_{counter}"
     
-    # Get engineer-specific question based on engineer ID
-    eng_num = int(eng_id[-1]) - 1  # eng001->0, eng002->1, eng003->2
-    question_index = eng_num % len(QUESTIONS[topic])
-    
     test = {
         'id': test_id,
         'engineer_id': eng_id,
         'topic': topic,
-        'questions': [QUESTIONS[topic][question_index]],  # Only one unique question per engineer
+        'questions': QUESTIONS[topic],  # All 10 questions for every engineer
         'answers': {},
         'status': 'pending',
         'created': datetime.now().isoformat(),
@@ -185,7 +181,7 @@ def admin():
         pending_html += f'''
         <div style="background: #f8fafc; padding: 15px; margin: 10px 0; border-radius: 8px; border: 1px solid #e2e8f0;">
             <strong>{p["topic"].replace("_", " ").title()} - {p["engineer_id"]}</strong><br>
-            <small>1 Question | Max: 10 points</small><br>
+            <small>10 Questions | Max: 100 points</small><br>
             <a href="/admin/review/{p["id"]}" style="background: #10b981; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 8px;">Review</a>
         </div>'''
     
@@ -276,11 +272,12 @@ def admin_review(test_id):
     
     if request.method == 'POST':
         total = 0
-        try:
-            score = float(request.form.get('score_0', 0))
-            total += score
-        except:
-            pass
+        for i in range(len(test['questions'])):
+            try:
+                score = float(request.form.get(f'score_{i}', 0))
+                total += score
+            except:
+                pass
         
         test['score'] = total
         test['status'] = 'completed'
@@ -357,7 +354,7 @@ def student():
             <div style="background: white; border-radius: 12px; padding: 20px; margin: 15px 0;">
                 <h3>{topic_display} Test</h3>
                 <div style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 12px; border-radius: 8px; text-align: center;">
-                    <strong>Score: {t["score"]}/10</strong>
+                    <strong>Score: {t["score"]}/100</strong>
                 </div>
             </div>'''
         elif status == 'submitted':
@@ -408,7 +405,7 @@ def student():
             <div class="stat"><div style="font-size: 20px; font-weight: bold;">{len(my_tests)}</div><div>Tests</div></div>
             <div class="stat"><div style="font-size: 20px; font-weight: bold;">{len([t for t in my_tests if t['status'] == 'completed'])}</div><div>Done</div></div>
             <div class="stat"><div style="font-size: 20px; font-weight: bold;">{user.get('exp', 0)}y</div><div>Experience</div></div>
-            <div class="stat"><div style="font-size: 20px; font-weight: bold;">1</div><div>Question</div></div>
+            <div class="stat"><div style="font-size: 20px; font-weight: bold;">10</div><div>Questions</div></div>
         </div>
         
         <div class="section">
@@ -430,11 +427,12 @@ def student_test(test_id):
     
     if request.method == 'POST' and test['status'] == 'pending':
         answers = {}
-        answer = request.form.get('answer_0', '').strip()
-        if answer:
-            answers['0'] = answer
+        for i in range(len(test['questions'])):
+            answer = request.form.get(f'answer_{i}', '').strip()
+            if answer:
+                answers[str(i)] = answer
         
-        if len(answers) == 1:
+        if len(answers) == len(test['questions']):
             test['answers'] = answers
             test['status'] = 'submitted'
         
@@ -445,7 +443,7 @@ def student_test(test_id):
         questions_html += f'''
         <div style="background: rgba(255,255,255,0.95); border-radius: 16px; padding: 24px; margin: 20px 0;">
             <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 8px 16px; border-radius: 20px; display: inline-block; margin-bottom: 16px;">
-                Question {i+1} of 1
+                Question {i+1} of {len(test['questions'])}
             </div>
             <div style="background: linear-gradient(135deg, #f8fafc, #f1f5f9); padding: 16px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid #667eea;">
                 {q}
