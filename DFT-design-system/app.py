@@ -12,43 +12,22 @@ users = {}
 assignments = {}
 counter = 0
 
-# Questions - 10 per topic, 3+ experience level
+# Questions - 9 total questions, 3 per topic, for 3 engineers
 QUESTIONS = {
     "scan_design": [
         "You have a design with 50,000 flip-flops and need to achieve 99% fault coverage. Describe your scan chain insertion strategy, including scan chain length optimization and timing considerations.",
         "Your scan insertion results show timing violations on scan paths with -200ps setup slack. What are the specific techniques you would use to fix scan timing without affecting functional timing?",
-        "During scan insertion, you encounter 500 non-scannable flops due to X-state issues and clock domain crossings. Describe your systematic approach to make these flops scannable.",
-        "Your design has multiple clock domains (4 different clocks) and you need to implement scan. Explain your scan architecture strategy and how you would handle clock domain crossing during scan mode.",
-        "After scan insertion, your design shows 15% area overhead which exceeds the 10% target. What techniques would you use to reduce scan area while maintaining coverage targets?",
-        "You're implementing scan compression and achieving only 20:1 compression ratio instead of target 50:1. What factors affect compression ratio and how would you improve it?",
-        "Your scan pattern simulation shows X-propagation causing pattern failures. Describe your approach to identify X-sources and implement X-masking or X-tolerance techniques.",
-        "During scan testing, you observe scan chain integrity failures in 3 out of 20 chains. What debug techniques would you use to isolate and fix scan chain breaks?",
-        "Your design requires at-speed scan testing for path delay faults. Explain your launch-on-capture vs launch-on-shift strategy and timing considerations for each approach.",
-        "You need to implement hierarchical scan for a large SoC with 10 IP blocks. Describe your scan planning strategy, including scan enable distribution and pattern flow management."
+        "During scan insertion, you encounter 500 non-scannable flops due to X-state issues and clock domain crossings. Describe your systematic approach to make these flops scannable."
     ],
     "bist_mbist": [
         "Your design has 200 memory instances (SRAM, ROM, RF) and you need to implement MBIST. Describe your MBIST architecture, including controller placement and test algorithm selection.",
         "During MBIST implementation, you're getting 85% memory coverage instead of target 95%. What factors affect MBIST coverage and how would you improve it?",
-        "Your MBIST patterns are detecting memory failures in 5% of dies. Explain your approach to analyze failure patterns and determine if they're systematic or random defects.",
-        "You need to implement runtime MBIST for automotive applications with 10^-9 failure rate requirement. Describe your MBIST strategy for continuous monitoring and error handling.",
-        "Your SoC has memories in different power domains and voltage islands. How would you implement MBIST considering power management and cross-domain testing challenges?",
-        "During MBIST execution, you observe test time exceeding target by 300%. What techniques would you use to optimize MBIST test time while maintaining coverage?",
-        "Your design requires both production test MBIST and field test MBIST. Explain the differences in requirements and how you would implement both modes efficiently.",
-        "You're implementing MBIST for high-speed memories (2GHz) and encountering timing closure issues. Describe your approach to handle high-frequency MBIST implementation.",
-        "Your MBIST controller is showing area overhead of 20% which exceeds budget. What architectural changes would you make to reduce MBIST area while maintaining functionality?",
-        "During MBIST debug, you find intermittent failures that don't reproduce consistently. What debug techniques and design modifications would you implement for better observability?"
+        "Your MBIST patterns are detecting memory failures in 5% of dies. Explain your approach to analyze failure patterns and determine if they're systematic or random defects."
     ],
     "boundary_scan": [
         "Your PCB has 15 ICs with JTAG boundary scan capability. Design a JTAG chain topology considering signal integrity, debug access, and manufacturing test requirements.",
         "During boundary scan implementation, you're achieving only 60% interconnect coverage on a complex PCB. What techniques would you use to improve coverage and test quality?",
-        "Your boundary scan testing reveals 20 interconnect failures between ICs. Describe your systematic approach to isolate opens, shorts, and bridging faults using boundary scan.",
-        "You need to implement IEEE 1149.1 compliance for a mixed-signal SoC with analog and digital pins. Explain your boundary scan cell design for different pin types.",
-        "Your JTAG chain has 500 boundary scan cells causing long test times. What optimization techniques would you implement to reduce test time while maintaining coverage?",
-        "During boundary scan testing, you encounter JTAG chain integrity issues with stuck-at faults in the chain. Describe your debug approach to locate and isolate chain failures.",
-        "Your design requires in-system programming through JTAG while maintaining boundary scan functionality. Explain your JTAG architecture to support both requirements efficiently.",
-        "You're implementing boundary scan for a high-speed design with 10Gbps differential pairs. What special considerations and techniques would you use for high-speed signal testing?",
-        "Your multi-chip module has 8 devices in a single JTAG chain with different voltage levels (1.2V, 1.8V, 3.3V). Describe your level-shifting strategy and chain design.",
-        "During boundary scan implementation, you need to test power and ground connections. Explain your approach to implement power supply pin testing using boundary scan techniques."
+        "Your boundary scan testing reveals 20 interconnect failures between ICs. Describe your systematic approach to isolate opens, shorts, and bridging faults using boundary scan."
     ]
 }
 
@@ -68,7 +47,7 @@ def init_data():
         'exp': 5
     }
     
-    for i in range(1, 6):
+    for i in range(1, 4):
         uid = f'eng00{i}'
         users[uid] = {
             'id': uid,
@@ -151,7 +130,7 @@ def login():
         </form>
         <div class="info">
             <strong>Test Login:</strong><br>
-            Engineers: eng001, eng002, eng003, eng004, eng005<br>
+            Engineers: eng001, eng002, eng003<br>
             Password: password123
         </div>
     </div>
@@ -220,7 +199,7 @@ def admin():
             <div class="stat"><div class="stat-num">{len(engineers)}</div><div>Engineers</div></div>
             <div class="stat"><div class="stat-num">{len(all_tests)}</div><div>Tests</div></div>
             <div class="stat"><div class="stat-num">{len(pending)}</div><div>Pending</div></div>
-            <div class="stat"><div class="stat-num">30</div><div>Questions</div></div>
+            <div class="stat"><div class="stat-num">9</div><div>Questions</div></div>
         </div>
         
         <div class="card">
